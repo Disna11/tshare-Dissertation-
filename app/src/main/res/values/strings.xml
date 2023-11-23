@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">tshare</string>
+    <string name="don_t_have_an_account_yet_create_one">Don\'t have an account yet?? Create one!!</string>
+    <string name="already_have_an_account">Already have an account??</string>
+    <string name="login">Login !</string>
+    <string name="what_is_your_username_and_password">What is your UserName and Password???</string>
+    <string name="don_t_have_an_account">Don\'t have an Account??</string>
+    <string name="sign_up">Sign_Up!!</string>
 </resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "477036381354",
+    "project_id": "tshare-cb902",
+    "storage_bucket": "tshare-cb902.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:477036381354:android:9b302295e0f22b058b3cd3",
+        "android_client_info": {
+          "package_name": "com.example.tshare"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWjI8mhpZXxsPp0IE-JIiPTiCPRHQDSDQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
