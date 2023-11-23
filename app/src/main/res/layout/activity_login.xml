@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/background">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="273dp"
+            android:background="@drawable/background">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="120dp"
+                android:src="@drawable/tshare" />
+
+        </FrameLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="What is your UserName and Password???"
+            android:textStyle="bold"
+            android:textSize="25sp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="#1566e0"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+
+            android:layout_marginTop="30dp"
+            android:layout_gravity="center"
+            android:background="@drawable/border">
+
+
+            <EditText
+                android:id="@+id/loginUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/username_icon"
+                android:background="@android:color/transparent"
+                android:hint="UserName"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="17dp"
+                android:textColor="#000000"
+                android:textColorHint="#808080"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="12sp" />
+
+            <ImageView
+                android:id="@+id/username_icon"
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/user" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="35dp"
+
+            android:background="@drawable/border">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/loginPassword"
+                android:layout_toRightOf="@+id/pass_icon"
+                android:background="@android:color/transparent"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:maxLines="1"
+                android:paddingLeft="17dp"
+                android:paddingTop="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="17dp"
+                android:textCursorDrawable="@drawable/cursor"
+                android:textSize="12sp"
+                android:textColorHint="#808080"
+                android:textColor="#000000"/>
+            <ImageView
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:id="@+id/pass_icon"
+                android:layout_marginLeft="17dp"
+                android:src="@drawable/password"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/log_button"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="62dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginRight="62dp"
+            android:background="@drawable/color_border"
+            android:text="Login" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>
