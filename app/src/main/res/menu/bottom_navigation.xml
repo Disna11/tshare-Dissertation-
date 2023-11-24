@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/btm_home"
+        android:title="Home"
+        android:icon="@drawable/icon_home"/>
+    <item android:id="@+id/btm_search"
+        android:title="Serach"
+        android:icon="@drawable/icon_search"/>
+    <item android:id="@+id/btm_add"
+        android:title="Add offers"
+        android:icon="@drawable/icon_add"/>
+    <item android:id="@+id/btm_chat"
+        android:title="Message"
+        android:icon="@drawable/icon_chat"/>
+    <item android:id="@+id/btm_profile"
+        android:title="profile"
+        android:icon="@drawable/icon_profile"/>
+</menu>
