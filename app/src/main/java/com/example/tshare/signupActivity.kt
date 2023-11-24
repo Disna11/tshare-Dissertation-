@@ -28,6 +28,17 @@ class signupActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
+    public override fun onStart() {
+        super.onStart()
+        // Check if user is signed in (non-null) and update UI accordingly.
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            val myIntent = Intent(applicationContext, homeActivity::class.java)
+            startActivity(myIntent)
+            finish()
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
