@@ -62,10 +62,12 @@ class ProfileFragment : Fragment() {
 
         }
         logoutButton?.setOnClickListener {
+            preferenceHelper!!.clearSharedPreferences()
             Firebase.auth.signOut()
             val myIntent = Intent(requireActivity(), loginActivity::class.java)
             startActivity(myIntent)
             requireActivity().finish()
+
         }
 
 

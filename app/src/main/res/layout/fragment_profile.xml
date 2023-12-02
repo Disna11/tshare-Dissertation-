@@ -87,8 +87,10 @@
                     android:src="@drawable/logout"
                     app:layout_constraintBottom_toTopOf="@+id/profile_photo"
                     app:layout_constraintTop_toTopOf="@+id/profile_photo"
-                    tools:layout_editor_absoluteX="350dp"
-                    tools:ignore="MissingConstraints" />
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:ignore="MissingConstraints"
+                    android:backgroundTint="#FFC0CB"
+                    tools:layout_editor_absoluteX="-1dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
