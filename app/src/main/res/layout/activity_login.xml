@@ -10,12 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@drawable/background">
+        android:background="@color/white">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="273dp"
-            android:background="@drawable/background">
+            android:layout_height="300dp"
+            android:background="@drawable/profile_top_background">
 
             <ImageView
                 android:layout_width="150dp"
@@ -34,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:gravity="center"
             android:layout_gravity="center"
-            android:textColor="#1566e0"
+            android:textColor="#009193"
             android:paddingTop="15dp"
             android:paddingBottom="15dp"
             />

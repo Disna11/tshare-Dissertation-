@@ -25,7 +25,7 @@ class loginActivity : AppCompatActivity() {
     var lpassword: EditText?=null
     var logbutton:Button?=null
     var tosignup: TextView?=null
-
+    var preferenceHelper: preferenceHelper? =null
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
@@ -42,6 +42,8 @@ class loginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        supportActionBar?.hide()
+
         //initialize progressbar
 
         prog=findViewById(R.id.log_progress)
@@ -56,6 +58,7 @@ class loginActivity : AppCompatActivity() {
         lpassword=findViewById(R.id.loginPassword)
         logbutton=findViewById(R.id.log_button)
         tosignup=findViewById(R.id.signup_text)
+        preferenceHelper = preferenceHelper(applicationContext)
 
 
         // when "alredy have an account?? Login!!" is clicked, add an intent to go to loginActivity.
@@ -90,8 +93,19 @@ class loginActivity : AppCompatActivity() {
                                 "Login Successful",
                                 Toast.LENGTH_SHORT,
                             ).show()
+                            // Get the current user
+                            val currentUser = auth.currentUser
 
+                            // Check if the user is not null
+                            if (currentUser != null) {
+                                // Access user information
+                                val uid = currentUser.uid?.toString() ?: ""
+                                val email = currentUser.email?.toString() ?:""
+                                val displayName = currentUser.displayName?.toString() ?:""
+                                preferenceHelper?.saveString("logedin_email", email)
+                                preferenceHelper?.saveString("logedin_dis", displayName)
 
+                            }
                             val myIntent = Intent(applicationContext, homeActivity::class.java)
                             startActivity(myIntent)
                             finish()

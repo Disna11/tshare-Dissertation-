@@ -22,6 +22,8 @@ class homeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        supportActionBar?.hide()
         auth = Firebase.auth
 
         BottomNavigationView=findViewById(R.id.btnav)

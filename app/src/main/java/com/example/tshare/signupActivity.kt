@@ -43,6 +43,8 @@ class signupActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
+        supportActionBar?.hide()
+
         //initialize all the widgets here
 
         signup_email = findViewById(R.id.email)
