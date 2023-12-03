@@ -42,10 +42,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
             android:padding="10dp">
 
-
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border"
+                android:hint=" Name"
+                android:paddingLeft="17dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="30dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/name"
+                android:textSize="12sp"
+                android:inputType="textEmailAddress"
+                android:textColorHint="#808080"
+                android:textColor="#000000"/>
 
             <EditText
                 android:layout_width="match_parent"
@@ -54,10 +68,11 @@
                 android:hint=" Email Id"
                 android:paddingLeft="17dp"
                 android:paddingRight="15dp"
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="30dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/email"
+                android:layout_below="@id/name"
                 android:textSize="12sp"
                 android:inputType="textEmailAddress"
                 android:textColorHint="#808080"
@@ -69,7 +84,7 @@
                 android:hint=" password"
                 android:paddingLeft="17dp"
                 android:paddingRight="15dp"
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="30dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/password"
@@ -85,7 +100,7 @@
                 android:hint="confirm password"
                 android:paddingLeft="17dp"
                 android:paddingRight="15dp"
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:paddingBottom="30dp"
                 android:layout_marginTop="15dp"
                 android:id="@+id/cpassword"
@@ -100,14 +115,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_progress"
                 android:visibility="gone"
-                android:foregroundGravity="center"/>
+                android:foregroundGravity="center_horizontal"/>
 
             <Button
                 android:id="@+id/register"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="50dp"
                 android:text="REGISTER"
                 android:layout_below="@id/cpassword"
@@ -120,7 +135,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="10dp"
             android:layout_marginLeft="62dp"
             android:layout_marginRight="62dp">
             <TextView

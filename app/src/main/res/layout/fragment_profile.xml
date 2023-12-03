@@ -66,7 +66,7 @@
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/profile_edit_photo"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginBottom="4dp"
                     android:clickable="true"
                     android:contentDescription="TODO"
@@ -74,13 +74,13 @@
                     android:src="@drawable/camera_profile"
                     android:tint="@color/white"
                     app:layout_constraintBottom_toBottomOf="@id/profile_photo"
-                    app:layout_constraintEnd_toEndOf="@+id/profile_photo"
-                    />
+                    app:layout_constraintEnd_toEndOf="@+id/profile_photo" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/profile_logout"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:backgroundTint="#FFC0CB"
                     android:clickable="true"
                     android:contentDescription="TODO"
                     android:focusable="true"
@@ -89,7 +89,6 @@
                     app:layout_constraintTop_toTopOf="@+id/profile_photo"
                     app:layout_constraintVertical_bias="0.0"
                     tools:ignore="MissingConstraints"
-                    android:backgroundTint="#FFC0CB"
                     tools:layout_editor_absoluteX="-1dp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
