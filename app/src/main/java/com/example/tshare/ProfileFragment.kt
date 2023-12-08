@@ -23,6 +23,10 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.storage
 import java.util.UUID
+import com.bumptech.glide.Glide
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 
 
 class ProfileFragment : Fragment() {
@@ -66,6 +70,8 @@ class ProfileFragment : Fragment() {
             val myIntent = Intent(requireActivity(), loginActivity::class.java)
             startActivity(myIntent)
             requireActivity().finish()
+        }else{
+            loadProfilePicture()
         }
 
         profileEmailTextView.setText(email)
@@ -90,6 +96,29 @@ class ProfileFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun loadProfilePicture() {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val profilePictureRef = FirebaseDatabase.getInstance().getReference("users/$uid/profilePicture")
+
+        profilePictureRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val profilePictureUrl = dataSnapshot.value.toString()
+
+                // Use Glide to load the image into the ImageView
+                Glide.with(requireContext())
+                    .load(profilePictureUrl)
+//                    .placeholder(R.drawable.profile_photo) // Placeholder image
+//                    .error(R.drawable.default_profile_image)       // Error image if loading fails
+                    .into(profilePhotoImageView)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                // Handle error
+                Log.e("ProfileFragment", "Error loading profile picture", databaseError.toException())
+            }
+        })
     }
 
     // Override onActivityResult method to handle the result
