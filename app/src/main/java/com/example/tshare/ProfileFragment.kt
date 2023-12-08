@@ -1,18 +1,28 @@
 package com.example.tshare
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.auth
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.storage
+import java.util.UUID
 
 
 class ProfileFragment : Fragment() {
@@ -27,7 +37,10 @@ class ProfileFragment : Fragment() {
     var uid:String?=null
     val defaultValue = ""
     var user:FirebaseUser?=null
+    private val PICK_IMAGE_REQUEST = 1
+    private var selectedImageUri: Uri?=null
     private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,8 +72,14 @@ class ProfileFragment : Fragment() {
         profileNameTextView.setText(uid)
 
         editPhotoButton?.setOnClickListener {
-
+            val photoIntent = Intent(Intent.ACTION_PICK)
+            photoIntent.type = "image/*"
+            startActivityForResult(photoIntent, 1)
         }
+
+
+
+
         logoutButton?.setOnClickListener {
             preferenceHelper!!.clearSharedPreferences()
             Firebase.auth.signOut()
@@ -70,9 +89,64 @@ class ProfileFragment : Fragment() {
 
         }
 
-
-
-
         return view
     }
+
+    // Override onActivityResult method to handle the result
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            // Handle the selected image URI here
+             selectedImageUri = data.data
+            getImageInImageView()
+
+        }
+    }
+
+    private fun getImageInImageView() {
+        val bitmap: Bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, selectedImageUri)
+        profilePhotoImageView.setImageBitmap(bitmap)
+        uploadImage()
+    }
+
+    private fun uploadImage() {
+        if (selectedImageUri != null) {
+            val storageReference = FirebaseStorage.getInstance().getReference("images/" + UUID.randomUUID().toString())
+            val uploadTask = storageReference.putFile(selectedImageUri!!)
+
+            uploadTask.addOnCompleteListener { taskSnapshot ->
+                if (taskSnapshot.isSuccessful) {
+                    taskSnapshot.getResult()?.storage?.downloadUrl?.addOnCompleteListener { urlTask ->
+                        if (urlTask.isSuccessful) {
+                            updateProfilePicture(urlTask.result.toString())
+                        }
+                    }
+
+                    Toast.makeText(requireContext(), "Profile picture updated", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(requireContext(), "Failed to update profile picture", Toast.LENGTH_SHORT).show()
+                }
+            }
+        } else {
+            Toast.makeText(requireContext(), "No image selected", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
+
+
+    private fun updateProfilePicture(url: String) {
+        FirebaseDatabase.getInstance().getReference("users/" + FirebaseAuth.getInstance().currentUser?.uid + "/profilePicture").setValue(url).
+            addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Database update successful
+                    Log.d("ProfileFragment", "Database update successful")
+                } else {
+                    // Database update failed
+                    Log.e("ProfileFragment", "Failed to update database", task.exception)
+                }
+            }
+    }
+
 }

@@ -8,6 +8,7 @@ import android.widget.*
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
+import com.google.firebase.database.DatabaseReference
 
 class loginActivity : AppCompatActivity() {
 
@@ -18,6 +19,7 @@ class loginActivity : AppCompatActivity() {
     //declare the firebase instance
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var database:DatabaseReference
 
     //declare all other widgets
 
