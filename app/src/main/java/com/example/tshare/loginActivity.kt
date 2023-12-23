@@ -103,9 +103,10 @@ class loginActivity : AppCompatActivity() {
                                 // Access user information
                                 val uid = currentUser.uid?.toString() ?: ""
                                 val email = currentUser.email?.toString() ?:""
-                                val displayName = currentUser.displayName?.toString() ?:""
+
+
                                 preferenceHelper?.saveString("logedin_email", email)
-                                preferenceHelper?.saveString("logedin_dis", displayName)
+                                preferenceHelper?.saveString("userid", uid)
 
                             }
                             val myIntent = Intent(applicationContext, homeActivity::class.java)

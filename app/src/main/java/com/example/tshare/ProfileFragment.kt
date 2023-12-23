@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
     private lateinit var logoutButton: FloatingActionButton
     var preferenceHelper: preferenceHelper? =null
     var email:String?=null
-    var uid:String?=null
+    var currentuid:String?=null
     val defaultValue = ""
     var user:FirebaseUser?=null
     private val PICK_IMAGE_REQUEST = 1
@@ -63,7 +63,7 @@ class ProfileFragment : Fragment() {
         logoutButton = view.findViewById(R.id.profile_logout)
         preferenceHelper = preferenceHelper(requireContext())
         email= preferenceHelper!!.getString("logedin_email", defaultValue)
-        uid= preferenceHelper!!.getString("logedin_dis", defaultValue)
+        currentuid= preferenceHelper!!.getString("userid", defaultValue)
         user=auth.currentUser
 
         if(user==null){
@@ -75,7 +75,31 @@ class ProfileFragment : Fragment() {
         }
 
         profileEmailTextView.setText(email)
-        profileNameTextView.setText(uid)
+        if(currentuid!=null){
+            val database = FirebaseDatabase.getInstance()
+            val usersPath = "users/$currentuid"
+            val currentUserRef = database.getReference(usersPath)
+            currentUserRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+
+                    if (dataSnapshot.exists()) {
+                        // Retrieve the username for the current user
+                        val username = dataSnapshot.child("username").getValue(String::class.java)
+                        profileNameTextView.setText(username)
+
+                    }else{
+                        Log.e("FirebaseData", "Data does not exist for the current user")
+
+                    }
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    Log.e("FirebaseData", "Error reading data from Firebase: ${databaseError.message}")
+
+                }
+            })
+        }
+//
 
         editPhotoButton?.setOnClickListener {
             val photoIntent = Intent(Intent.ACTION_PICK)
