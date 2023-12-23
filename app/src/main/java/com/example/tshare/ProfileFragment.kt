@@ -36,6 +36,7 @@ class ProfileFragment : Fragment() {
     private lateinit var profileEmailTextView: TextView
     private lateinit var editPhotoButton: FloatingActionButton
     private lateinit var logoutButton: FloatingActionButton
+    private  lateinit var  editprofiletxt: TextView
     var preferenceHelper: preferenceHelper? =null
     var email:String?=null
     var currentuid:String?=null
@@ -62,6 +63,7 @@ class ProfileFragment : Fragment() {
         editPhotoButton = view.findViewById(R.id.profile_edit_photo)
         logoutButton = view.findViewById(R.id.profile_logout)
         preferenceHelper = preferenceHelper(requireContext())
+        editprofiletxt=view.findViewById(R.id.editprofile)
         email= preferenceHelper!!.getString("logedin_email", defaultValue)
         currentuid= preferenceHelper!!.getString("userid", defaultValue)
         user=auth.currentUser
@@ -105,6 +107,12 @@ class ProfileFragment : Fragment() {
             val photoIntent = Intent(Intent.ACTION_PICK)
             photoIntent.type = "image/*"
             startActivityForResult(photoIntent, 1)
+        }
+
+        editprofiletxt?.setOnClickListener {
+            val myIntent= Intent(requireActivity(),editPersonalDetailsActivity::class.java)
+            startActivity(myIntent)
+            requireActivity().finish()
         }
 
 
