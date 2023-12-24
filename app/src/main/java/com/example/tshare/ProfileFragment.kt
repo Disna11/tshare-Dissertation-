@@ -88,6 +88,9 @@ class ProfileFragment : Fragment() {
                         // Retrieve the username for the current user
                         val username = dataSnapshot.child("username").getValue(String::class.java)
                         profileNameTextView.setText(username)
+                        if (username != null) {
+                            preferenceHelper?.saveString("firstname", username)
+                        }
 
                     }else{
                         Log.e("FirebaseData", "Data does not exist for the current user")
@@ -109,10 +112,12 @@ class ProfileFragment : Fragment() {
             startActivityForResult(photoIntent, 1)
         }
 
-        editprofiletxt?.setOnClickListener {
-            val myIntent= Intent(requireActivity(),editPersonalDetailsActivity::class.java)
-            startActivity(myIntent)
-            requireActivity().finish()
+      editprofiletxt?.setOnClickListener {
+          val editProfileFragment = editProfileFragment()
+          val transaction = requireActivity().supportFragmentManager.beginTransaction()
+          transaction.replace(R.id.fragment_container, editProfileFragment)
+          transaction.addToBackStack(null)  // Optional: Add to back stack
+          transaction.commit()
         }
 
 
