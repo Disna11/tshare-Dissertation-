@@ -107,6 +107,8 @@ class loginActivity : AppCompatActivity() {
 
                                 preferenceHelper?.saveString("logedin_email", email)
                                 preferenceHelper?.saveString("userid", uid)
+                                preferenceHelper?.saveString("userpassword", password)
+                                var ppp=preferenceHelper?.getString("userpassword","")
 
                             }
                             val myIntent = Intent(applicationContext, homeActivity::class.java)

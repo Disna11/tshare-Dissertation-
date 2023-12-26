@@ -37,6 +37,7 @@ class ProfileFragment : Fragment() {
     private lateinit var editPhotoButton: FloatingActionButton
     private lateinit var logoutButton: FloatingActionButton
     private  lateinit var  editprofiletxt: TextView
+    private  lateinit var  updatePasswordtxt: TextView
     var preferenceHelper: preferenceHelper? =null
     var email:String?=null
     var currentuid:String?=null
@@ -64,6 +65,7 @@ class ProfileFragment : Fragment() {
         logoutButton = view.findViewById(R.id.profile_logout)
         preferenceHelper = preferenceHelper(requireContext())
         editprofiletxt=view.findViewById(R.id.editprofile)
+        updatePasswordtxt=view.findViewById(R.id.resetPassword)
         email= preferenceHelper!!.getString("logedin_email", defaultValue)
         currentuid= preferenceHelper!!.getString("userid", defaultValue)
         user=auth.currentUser
@@ -119,6 +121,14 @@ class ProfileFragment : Fragment() {
           transaction.addToBackStack(null)  // Optional: Add to back stack
           transaction.commit()
         }
+        updatePasswordtxt?.setOnClickListener {
+            val changePasswordFragment= changePasswordFragment()
+            val transaction= requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container,changePasswordFragment)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+
 
 
 

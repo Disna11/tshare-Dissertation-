@@ -38,4 +38,11 @@
     <string name="phone_edit">Update Your Phone Number</string>
     <string name="phone_edityour_phone_number">Your Phone Number</string>
     <string name="phone_editupdate">Update</string>
+    <string name="profilerset_your_password">Rset Your Password</string>
+    <string name="change_passwordchange_your_password">Change your Password</string>
+    <string name="changyour_password">Your Password</string>
+    <string name="change_passwordyour_password">Your Password</string>
+    <string name="change_passwordnew_password">New Password</string>
+    <string name="change_passwordconfirm_password">Confirm Password</string>
+    <string name="change_passwordupdate">Update</string>
 </resources>
