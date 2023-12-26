@@ -111,7 +111,7 @@ class signupActivity : AppCompatActivity() {
                                 // Create a reference to the user node using the UID
                                 val userReference = database.getReference("users/$uid")
                                 // Create a User object with the provided information
-                                val newUser = User(name, email, "")
+                                val newUser = User(name, email, "","","","","")
                                 userReference.setValue(newUser)
                                     .addOnCompleteListener { databaseTask ->
                                         if (databaseTask.isSuccessful) {
