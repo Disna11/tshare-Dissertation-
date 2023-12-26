@@ -130,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:layout_marginBottom="8dp"
-                    android:text="Edit Personal Details"
+                    android:text="@string/edit_personal_details"
                     android:textColor="@color/black"
                     android:textSize="25sp"
                     android:textStyle="bold"
@@ -140,6 +140,9 @@
                     app:layout_constraintStart_toStartOf="parent" />
                 </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+
+
 
 
 

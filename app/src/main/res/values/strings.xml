@@ -6,6 +6,36 @@
     <string name="what_is_your_username_and_password">What is your UserName and Password???</string>
     <string name="don_t_have_an_account">Don\'t have an Account??</string>
     <string name="sign_up">Sign_Up!!</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="edit_personal_details">Edit Personal Details</string>
+    <string name="username">UserName</string>
+    <string name="loginpassword">Password</string>
+    <string name="buttonlogin">Login</string>
+    <string name="driving_alone_hurts_your_wallet_and_health">Driving alone hurts your wallet and health !!</string>
+    <string name="mainactivitylogin">Login</string>
+    <string name="mainactivityregister">Register</string>
+    <string name="signupname">Name</string>
+    <string name="signupemail_id">Email Id</string>
+    <string name="signuppassword">password</string>
+    <string name="signupconfirm_password">confirm password</string>
+    <string name="signupregister">REGISTER</string>
+    <string name="address_edit_update_your_address">Update Your Address</string>
+    <string name="address_edityour_address">Your Address</string>
+    <string name="address_editupdate">Update</string>
+    <string name="dob_editupdate_your_date_of_birth">Update Your Date Of Birth</string>
+    <string name="dob_edityour_date_of_birth">Your Date Of Birth</string>
+    <string name="dob_editupdate">Update</string>
+    <string name="profilr_editemail_id">Email ID</string>
+    <string name="profile_editfirst_name">First Name</string>
+    <string name="profile_editlast_name">Last Name</string>
+    <string name="profile_editaddress">Address</string>
+    <string name="profile_editdate_of_birth">Date of Birth</string>
+    <string name="profile_editphone_number">Phone Number</string>
+    <string name="lastname_editupdate_your_last_name">Update Your Last Name</string>
+    <string name="lastname_edityour_last_name">Your Last Name</string>
+    <string name="last_nameupdate">Update</string>
+    <string name="phone_edit">Update Your Phone Number</string>
+    <string name="phone_edityour_phone_number">Your Phone Number</string>
+    <string name="phone_editupdate">Update</string>
 </resources>

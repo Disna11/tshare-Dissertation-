@@ -31,7 +31,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_marginLeft="70dp"
-        android:text="Update Your Address"
+        android:text="@string/address_edit_update_your_address"
         android:textColor="#009193"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -58,7 +58,7 @@
                 android:id="@+id/addressUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="Your Address"
+                android:hint="@string/address_edityour_address"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20dp"
@@ -68,7 +68,7 @@
                 android:id="@+id/addressUpdateButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:text="Update"
+                android:text="@string/address_editupdate"
                 android:layout_marginTop="40dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

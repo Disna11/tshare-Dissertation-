@@ -116,45 +116,26 @@ class signupActivity : AppCompatActivity() {
                                     .addOnCompleteListener { databaseTask ->
                                         if (databaseTask.isSuccessful) {
                                             // Sign in success, update UI with the signed-in user's information
-                                            Toast.makeText(
-                                                this,
-                                                "Account successfully created",
-                                                Toast.LENGTH_SHORT,
-                                            ).show()
-                                            val myIntent = Intent(
-                                                applicationContext,
-                                                loginActivity::class.java
-                                            )
+                                            Toast.makeText(this, "Account successfully created", Toast.LENGTH_SHORT,).show()
+                                            val myIntent = Intent(applicationContext, loginActivity::class.java)
                                             startActivity(myIntent)
                                             finish()
                                         } else {
                                             // Handle the case where database update fails
-                                            Toast.makeText(
-                                                this,
-                                                "Failed to update user information in the database",
-                                                Toast.LENGTH_SHORT
-                                            ).show()
+                                            Toast.makeText(this, "Failed to update user information in the database", Toast.LENGTH_SHORT).show()
                                         }
                                     }
 
 
                             } else {
                                 // Handle the case where UID is null
-                                Toast.makeText(
-                                    this,
-                                    "Failed to get user ID",
-                                    Toast.LENGTH_SHORT
-                                ).show()
+                                Toast.makeText(this, "Failed to get user ID", Toast.LENGTH_SHORT).show()
                             }
 
                         } else {
                             // If sign in fails, display a message to the user.
                             val errorMessage = task.exception?.localizedMessage ?: "Authentication failed."
-                            Toast.makeText(
-                                baseContext,
-                                errorMessage,
-                                Toast.LENGTH_SHORT,
-                            ).show()
+                            Toast.makeText(baseContext, errorMessage, Toast.LENGTH_SHORT,).show()
 
                         }
                     }

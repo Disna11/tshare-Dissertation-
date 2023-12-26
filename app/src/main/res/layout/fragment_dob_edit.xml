@@ -31,7 +31,7 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp"
         android:layout_marginLeft="70dp"
-        android:text="Update Your Date Of Birth"
+        android:text="@string/dob_editupdate_your_date_of_birth"
         android:textColor="#009193"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -58,7 +58,7 @@
                 android:id="@+id/dobUpdate"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:hint="Your Date Of Birth"
+                android:hint="@string/dob_edityour_date_of_birth"
                 android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="20dp"
@@ -69,7 +69,7 @@
                 android:id="@+id/dobUpdateButton"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:text="Update"
+                android:text="@string/dob_editupdate"
                 android:layout_marginTop="40dp"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

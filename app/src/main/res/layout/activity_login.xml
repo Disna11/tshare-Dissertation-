@@ -54,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/username_icon"
                 android:background="@android:color/transparent"
-                android:hint="UserName"
+                android:hint="@string/username"
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:paddingLeft="17dp"
@@ -90,7 +90,7 @@
                 android:id="@+id/loginPassword"
                 android:layout_toRightOf="@+id/pass_icon"
                 android:background="@android:color/transparent"
-                android:hint="Password"
+                android:hint="@string/loginpassword"
                 android:inputType="textPassword"
                 android:maxLength="15"
                 android:maxLines="1"
@@ -127,7 +127,7 @@
             android:layout_marginTop="30dp"
             android:layout_marginRight="62dp"
             android:background="@drawable/color_border"
-            android:text="Login" />
+            android:text="@string/buttonlogin" />
 
         <ProgressBar
             android:layout_width="wrap_content"

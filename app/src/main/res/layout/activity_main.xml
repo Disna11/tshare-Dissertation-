@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Driving alone hurts your wallet and health !!"
+            android:text="@string/driving_alone_hurts_your_wallet_and_health"
             android:textSize="30sp"
             android:layout_gravity="center"
             android:textColor="@color/black"
@@ -42,7 +42,7 @@
 
             android:layout_marginTop="40dp"
            android:layout_gravity="center"
-            android:text="Login"
+            android:text="@string/mainactivitylogin"
             android:background="@drawable/color_border"/>
 
         <Button
@@ -52,7 +52,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
 
-            android:text="Register"
+            android:text="@string/mainactivityregister"
             android:background="@drawable/color_border"/>
 
 

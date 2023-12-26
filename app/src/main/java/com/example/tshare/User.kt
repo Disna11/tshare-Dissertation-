@@ -9,7 +9,7 @@ class User(
     private var lastName: String? = null,
     private var address: String? = null,
     private var dob: String? = null,
-    private var phoneNumber: String? = null
+    private var phone: String? = null
 
 
 
@@ -69,13 +69,13 @@ class User(
     fun setDob(newDob: String?) {
         dob = newDob
     }
-    fun getPhonenumber(): String? {
-        return phoneNumber
+    fun getPhone(): String? {
+        return phone
     }
 
     // Setter for username
-    fun setPhonenumber(newPhonenumber: String?) {
-        phoneNumber = newPhonenumber
+    fun setPhone(newPhone: String?) {
+        phone = newPhone
     }
 }
 
