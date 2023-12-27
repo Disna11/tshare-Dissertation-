@@ -62,7 +62,7 @@
                     tools:layout_editor_absoluteX="0dp"
                     tools:layout_editor_absoluteY="102dp"
                     android:id="@+id/emailTXT"
-                    android:text="@string/profilr_editemail_id"
+                    android:text="@string/profile_editemail_id"
                     android:gravity="center_vertical"
                     android:textSize="20dp"
                     android:textStyle="bold"

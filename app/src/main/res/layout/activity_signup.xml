@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/reg_progress"
                 android:visibility="gone"
-                android:foregroundGravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"/>
 
             <Button
                 android:id="@+id/register"
@@ -159,7 +159,6 @@
                 android:id="@+id/login_text"
                 android:textColor="@color/black"
                 android:textSize="15sp"
-
                 android:paddingTop="15dp"
                 android:paddingLeft="10dp"
                 android:paddingBottom="17dp"

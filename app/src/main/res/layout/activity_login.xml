@@ -116,7 +116,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/log_progress"
             android:visibility="gone"
-            android:foregroundGravity="center"/>
+            android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/log_button"

@@ -110,9 +110,12 @@ class signupActivity : AppCompatActivity() {
                             if (uid != null) {
                                 // Create a reference to the user node using the UID
                                 val userReference = database.getReference("users/$uid")
+                                val userReferenceVehicle = database.getReference("vehicle/$uid")
                                 // Create a User object with the provided information
                                 val newUser = User(name, email, "","","","","")
+                                val newVehicle=VehicleAndDriver("","","","","","","")
                                 userReference.setValue(newUser)
+                                userReferenceVehicle.setValue(newVehicle)
                                     .addOnCompleteListener { databaseTask ->
                                         if (databaseTask.isSuccessful) {
                                             // Sign in success, update UI with the signed-in user's information

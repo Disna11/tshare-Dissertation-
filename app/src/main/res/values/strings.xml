@@ -26,7 +26,7 @@
     <string name="dob_editupdate_your_date_of_birth">Update Your Date Of Birth</string>
     <string name="dob_edityour_date_of_birth">Your Date Of Birth</string>
     <string name="dob_editupdate">Update</string>
-    <string name="profilr_editemail_id">Email ID</string>
+    <string name="profile_editemail_id">Email ID</string>
     <string name="profile_editfirst_name">First Name</string>
     <string name="profile_editlast_name">Last Name</string>
     <string name="profile_editaddress">Address</string>
@@ -38,11 +38,20 @@
     <string name="phone_edit">Update Your Phone Number</string>
     <string name="phone_edityour_phone_number">Your Phone Number</string>
     <string name="phone_editupdate">Update</string>
-    <string name="profilerset_your_password">Rset Your Password</string>
+    <string name="profilereset_your_password">Reset Your Password</string>
     <string name="change_passwordchange_your_password">Change your Password</string>
     <string name="changyour_password">Your Password</string>
     <string name="change_passwordyour_password">Your Password</string>
     <string name="change_passwordnew_password">New Password</string>
     <string name="change_passwordconfirm_password">Confirm Password</string>
     <string name="change_passwordupdate">Update</string>
+    <string name="profilevehicle_information">Vehicle Information</string>
+    <string name="addvehiclevehicle_name">Vehicle Name</string>
+    <string name="addvehiclemodel_name">model Name</string>
+    <string name="addvehiclefuel_type">Fuel Type</string>
+    <string name="addvehiclevehicle_registeration_number">Vehicle Registeration Number</string>
+    <string name="addvehiclevehicle_owner_name">Vehicle owner name</string>
+    <string name="addvehicledriver_s_license">Driver\'s License</string>
+    <string name="addvehicleadd_details">ADD DETAILS</string>
+    <string name="addvehicleadd_vehicle_details">Add Vehicle Details</string>
 </resources>

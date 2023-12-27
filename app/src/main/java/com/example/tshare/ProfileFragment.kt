@@ -38,6 +38,7 @@ class ProfileFragment : Fragment() {
     private lateinit var logoutButton: FloatingActionButton
     private  lateinit var  editprofiletxt: TextView
     private  lateinit var  updatePasswordtxt: TextView
+    private  lateinit var  vehicleinfo: TextView
     var preferenceHelper: preferenceHelper? =null
     var email:String?=null
     var currentuid:String?=null
@@ -66,6 +67,7 @@ class ProfileFragment : Fragment() {
         preferenceHelper = preferenceHelper(requireContext())
         editprofiletxt=view.findViewById(R.id.editprofile)
         updatePasswordtxt=view.findViewById(R.id.resetPassword)
+        vehicleinfo=view.findViewById(R.id.vehicleInformation)
         email= preferenceHelper!!.getString("logedin_email", defaultValue)
         currentuid= preferenceHelper!!.getString("userid", defaultValue)
         user=auth.currentUser
@@ -129,8 +131,13 @@ class ProfileFragment : Fragment() {
             transaction.commit()
         }
 
-
-
+        vehicleinfo?.setOnClickListener {
+            val addVehicleInformation=addVehicleInformation()
+            val transaction=requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container,addVehicleInformation)
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
 
 
         logoutButton?.setOnClickListener {

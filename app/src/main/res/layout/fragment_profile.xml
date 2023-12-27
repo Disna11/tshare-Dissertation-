@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="30dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     app:cardCornerRadius="8dp"
@@ -124,7 +124,7 @@
                     android:id="@+id/editprofile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="8dp"
                     android:text="@string/edit_personal_details"
                     android:textColor="@color/black"
@@ -141,7 +141,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="8dp"
@@ -160,9 +160,44 @@
                         android:id="@+id/resetPassword"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginBottom="8dp"
-                        android:text="@string/profilerset_your_password"
+                        android:text="@string/profilereset_your_password"
+                        android:textColor="@color/black"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.089"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="8dp"
+                android:layout_centerInParent="true"
+                tools:ignore="MissingConstraints">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:background="@drawable/card_background"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/vehicleInformation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/profilevehicle_information"
                         android:textColor="@color/black"
                         android:textSize="25sp"
                         android:textStyle="bold"
