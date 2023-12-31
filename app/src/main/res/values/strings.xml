@@ -54,4 +54,7 @@
     <string name="addvehicledriver_s_license">Driver\'s License</string>
     <string name="addvehicleadd_details">ADD DETAILS</string>
     <string name="addvehicleadd_vehicle_details">Add Vehicle Details</string>
+    <string name="addfragment_find_someone_to_fill_your_car_seats">Find Someone to Fill Your Car Seats</string>
+    <string name="addfragmentfind_someone_to_share_your_car">Find Someone to Share Your Car.</string>
+    <string name="addfragmentfind_someone_to_share_a_taxi">Find Someone to Share a Taxi.</string>
 </resources>

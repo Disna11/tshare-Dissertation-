@@ -73,6 +73,7 @@ class signupActivity : AppCompatActivity() {
             finish()
 
         }
+        // Add this code inside signupActivity
 
         signup_button?.setOnClickListener {
 
@@ -128,7 +129,6 @@ class signupActivity : AppCompatActivity() {
                                             Toast.makeText(this, "Failed to update user information in the database", Toast.LENGTH_SHORT).show()
                                         }
                                     }
-
 
                             } else {
                                 // Handle the case where UID is null

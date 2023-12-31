@@ -86,7 +86,7 @@
                     android:id="@+id/profile_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:backgroundTint="#FFC0CB"
+                    app:backgroundTint="@color/white"
                     android:clickable="true"
                     android:contentDescription="TODO"
                     android:focusable="true"
