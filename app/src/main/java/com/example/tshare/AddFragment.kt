@@ -1,5 +1,6 @@
 package com.example.tshare
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 class AddFragment : Fragment() {
     private lateinit var car:TextView
     private lateinit var  taxi:TextView
-    private lateinit var closeButton: FloatingActionButton
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,18 +24,16 @@ class AddFragment : Fragment() {
 
         car= view.findViewById(R.id.carTXT)
         taxi= view.findViewById(R.id.taxiTXT)
-        closeButton=view.findViewById(R.id.close_button)
 
-        closeButton?.setOnClickListener {
-            requireActivity().supportFragmentManager.popBackStack()
-        }
 
         car?.setOnClickListener {
-
+            val intent = Intent(requireContext(), bookCarActivity::class.java)
+            startActivity(intent)
         }
 
         taxi?.setOnClickListener {
-
+            val intent = Intent(requireContext(), bookTaxiActivity::class.java)
+            startActivity(intent)
         }
 
         return  view

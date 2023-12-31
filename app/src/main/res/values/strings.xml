@@ -57,4 +57,7 @@
     <string name="addfragment_find_someone_to_fill_your_car_seats">Find Someone to Fill Your Car Seats</string>
     <string name="addfragmentfind_someone_to_share_your_car">Find Someone to Share Your Car.</string>
     <string name="addfragmentfind_someone_to_share_a_taxi">Find Someone to Share a Taxi.</string>
+    <string name="bookcarfrom">From</string>
+    <string name="bookcarto">To</string>
+    <string name="bookcardate">Date</string>
 </resources>

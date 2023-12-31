@@ -255,6 +255,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/black"
                     tools:ignore="MissingConstraints"
+                    android:maxLines="7"
                     app:layout_constraintTop_toBottomOf="@+id/lastnameLayout"/>
 
                     <RelativeLayout
