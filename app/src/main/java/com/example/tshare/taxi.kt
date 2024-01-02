@@ -2,14 +2,13 @@ package com.example.tshare
 
 import java.io.Serializable
 
-class carSeatBooking(private var From: String? = null,
-                     private var To:String? = null,
-                     private var Date:String? = null,
-                     private var Time:String? = null,
-                     private var Preference:String? = null,
-                     private var Privacy:String? = null,
-                     private var timeZone:String? = null
-) : Serializable{
+class taxi(private var From: String? = null,
+           private var To:String? = null,
+           private var Date:String? = null,
+           private var Time:String? = null,
+           private var Preference:String? = null,
+           private var timeZone:String? = null
+) : Serializable {
     fun getFrom(): String? {
         return From
     }
@@ -50,14 +49,6 @@ class carSeatBooking(private var From: String? = null,
     fun setPreference(newPreference: String?) {
         Preference = newPreference
     }
-    fun getPrivacy(): String? {
-        return Privacy
-    }
-
-    // Setter for username
-    fun setPrivacy(newPrivacy: String?) {
-        Privacy = newPrivacy
-    }
     fun getTimeZone(): String? {
         return timeZone
     }
@@ -66,5 +57,4 @@ class carSeatBooking(private var From: String? = null,
     fun setTimeZone(newTimeZone: String?) {
         timeZone = newTimeZone
     }
-
 }
