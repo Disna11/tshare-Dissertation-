@@ -165,10 +165,10 @@ class bookTaxiActivity : AppCompatActivity() {
             val userId = FirebaseAuth.getInstance().currentUser?.uid
 
             if (userId != null) {
-                val userReference = database.getReference("taxiRequests/$userId")
+                val userReference = database.getReference("taxiRequests")
 
                 // Create a data class or use a Map to store values
-                val bookingData = taxi(from, to, date, time, preference,  timeZone )
+                val bookingData = taxi(from, to, date, time, preference,  timeZone ,userId)
 
                 // Use setValue or updateChildren to push data to the database
                 userReference.push().setValue(bookingData)

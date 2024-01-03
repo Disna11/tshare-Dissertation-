@@ -7,7 +7,8 @@ class taxi(private var From: String? = null,
            private var Date:String? = null,
            private var Time:String? = null,
            private var Preference:String? = null,
-           private var timeZone:String? = null
+           private var timeZone:String? = null,
+           private var userId:String? = null
 ) : Serializable {
     fun getFrom(): String? {
         return From
@@ -56,5 +57,13 @@ class taxi(private var From: String? = null,
     // Setter for username
     fun setTimeZone(newTimeZone: String?) {
         timeZone = newTimeZone
+    }
+    fun getUserId(): String? {
+        return userId
+    }
+
+    // Setter for username
+    fun setUserId(newUserId: String?) {
+        userId = newUserId
     }
 }
