@@ -1,5 +1,6 @@
 package com.example.tshare
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -98,7 +99,7 @@ class bookCarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_book_car)
-         closebutton= findViewById(R.id.close_button)
+        closebutton= findViewById(R.id.close_button)
         fromEDT= findViewById(R.id.from)
         toEDT=findViewById(R.id.to)
         dateEDT=findViewById(R.id.date)
@@ -128,7 +129,7 @@ class bookCarActivity : AppCompatActivity() {
         timeSpinner.adapter=arrayAdp
         timeSpinner?.onItemSelectedListener= object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                 timeZone=  times[p2]
+                timeZone=  times[p2]
                 val txt=findViewById<TextView>(R.id.selectedAmPm)
                 txt?.setText(timeZone)
             }
@@ -136,6 +137,10 @@ class bookCarActivity : AppCompatActivity() {
             override fun onNothingSelected(p0: AdapterView<*>?) {
                 Toast.makeText(this@bookCarActivity, "Please select AM or PM", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        dateEDT.setOnClickListener {
+            showDatePicker()
         }
 
         // Set a TextWatcher to monitor text changes
@@ -168,7 +173,7 @@ class bookCarActivity : AppCompatActivity() {
             val selectedDate = Calendar.getInstance()
             selectedDate.time = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(date)
 
-            val currentDate = Calendar.getInstance()
+            val currentDate = Calendar.getInstance().time
 
             if (selectedDate.before(currentDate)) {
                 // Show an error message if the selected date is before the current date
@@ -226,5 +231,37 @@ class bookCarActivity : AppCompatActivity() {
             Toast.makeText(this, "Invalid time format. Please use HH:MM", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun showDatePicker() {
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // Check if the selected date is not before the current date
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+                if (!selectedDate.before(currentDate)) {
+                    // Format the selected date and update the EditText
+                    val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedDate.time)
+                    dateEDT.setText(formattedDate)
+                } else {
+                    // Show an error message or handle the invalid date
+                    Toast.makeText(this, "Please select a date on or after the current date", Toast.LENGTH_SHORT).show()
+                }
+            },
+            year,
+            month,
+            day
+        )
+
+        datePicker.show()
+    }
+
+
+
 
 }

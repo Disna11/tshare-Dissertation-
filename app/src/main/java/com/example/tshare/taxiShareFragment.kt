@@ -1,59 +1,86 @@
 package com.example.tshare
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [taxiShareFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class taxiShareFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var dbref: DatabaseReference
+    private lateinit var taxiShareRecyclerview: RecyclerView
+    private lateinit var taxiShareArraylist: ArrayList<recyclerTaxiShare>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_taxi_share, container, false)
+        val view= inflater.inflate(R.layout.fragment_taxi_share, container, false)
+        taxiShareRecyclerview=view.findViewById(R.id.taxiRequests)
+        taxiShareRecyclerview.layoutManager= LinearLayoutManager(requireActivity())
+        taxiShareRecyclerview.setHasFixedSize(true)
+
+        taxiShareArraylist= arrayListOf<recyclerTaxiShare>()
+        getOffers()
+
+
+        return view
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment taxiShareFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            taxiShareFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    private fun getOffers() {
+        dbref= FirebaseDatabase.getInstance().getReference("taxiRequests")
+        dbref.addValueEventListener(object : ValueEventListener {
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    for (userSnapshot in snapshot.children){
+                        val taxiRequests= userSnapshot.getValue(recyclerTaxiShare::class.java)
+                        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                        val dateInString=taxiRequests?.date
+                        val firebaseDate = dateFormat.parse(dateInString)
+                        val calendar = Calendar.getInstance()
+                        calendar.time = firebaseDate
+                        calendar.set(Calendar.HOUR_OF_DAY, 0)
+                        calendar.set(Calendar.MINUTE, 0)
+                        calendar.set(Calendar.SECOND, 0)
+                        calendar.set(Calendar.MILLISECOND, 0)
+
+                        val midnightFirebaseDate = calendar.time
+                        val currentDate = Calendar.getInstance().time
+                        val midnightCurrentDate = Calendar.getInstance().apply {
+                            time = currentDate
+                            set(Calendar.HOUR_OF_DAY, 0)
+                            set(Calendar.MINUTE, 0)
+                            set(Calendar.SECOND, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }.time
+
+
+                        if (midnightFirebaseDate >= midnightCurrentDate) {
+                            taxiShareArraylist.add(taxiRequests!!)
+                        }
+                    }
+
+                    taxiShareRecyclerview.adapter= homeFragmentTaxiShareAdapter(taxiShareArraylist)
                 }
             }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Firebase", "Error fetching data: ${error.message}")
+            }
+
+        })
     }
+
+
 }

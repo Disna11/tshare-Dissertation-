@@ -8,15 +8,17 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 
-class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) : RecyclerView.Adapter<homeFragmentCarAdapter.MyViewHolder>() {
+class homeFragmentTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShare>) : RecyclerView.Adapter<homeFragmentTaxiShareAdapter.MyViewHolder>() {
+
+
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       val itemView= LayoutInflater.from(parent.context).inflate(R.layout.offers_item,parent,false)
-        return MyViewHolder(itemView)
+
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.taxi_item,parent,false)
+        return homeFragmentTaxiShareAdapter.MyViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
@@ -24,7 +26,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) 
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val  currentitem= offerList[position]
+        val currentitem = offerList[position]
 
         holder.aFrom.text = currentitem.from
         holder.aTo.text = currentitem.to
@@ -32,7 +34,6 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) 
         holder.aTime.text = currentitem.time
         holder.aTimezone.text = currentitem.timeZone
         holder.aPreference.text = currentitem.preference
-
 
         holder.map_button?.setOnClickListener {
             val source = currentitem.from.toString()
@@ -48,17 +49,21 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) 
                 holder.itemView.context.startActivity(intent)
             }
         }
+
+
     }
+
+
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        val  aFrom : TextView = itemView.findViewById(R.id.reFrom)
-        val  aTo : TextView = itemView.findViewById(R.id.reTo)
-        val  aDate : TextView = itemView.findViewById(R.id.reDate)
-        val  aTime : TextView = itemView.findViewById(R.id.reTime)
-        val  aTimezone: TextView = itemView.findViewById(R.id.reTimeZone)
-        val  aPreference: TextView = itemView.findViewById(R.id.rePreference)
-        val map_button: Button = itemView.findViewById(R.id.reRoute)
-
+        val  aFrom : TextView = itemView.findViewById(R.id.taxiFrom)
+        val  aTo : TextView = itemView.findViewById(R.id.taxiTo)
+        val  aDate : TextView = itemView.findViewById(R.id.taxiDate)
+        val  aTime : TextView = itemView.findViewById(R.id.taxiTime)
+        val  aTimezone: TextView = itemView.findViewById(R.id.taxiTimeZone)
+        val  aPreference: TextView = itemView.findViewById(R.id.taxiPreference)
+        val map_button: Button = itemView.findViewById(R.id.taxiRoute)
 
     }
 }

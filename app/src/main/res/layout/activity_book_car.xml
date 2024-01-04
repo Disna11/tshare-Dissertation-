@@ -91,7 +91,7 @@
                             android:id="@+id/date"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:hint="@string/bookcardate"
+                            android:hint="Date(dd/mm/yyyy)"
                             android:textStyle="bold"
                             android:textColor="@color/black"
                             android:textSize="20dp"

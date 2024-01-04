@@ -1,5 +1,6 @@
 package com.example.tshare
 
+import android.app.DatePickerDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -122,6 +123,10 @@ class bookTaxiActivity : AppCompatActivity() {
             }
         }
 
+        dateEDT.setOnClickListener {
+            showDatePicker()
+        }
+
         // Set a TextWatcher to monitor text changes
         timeEDT.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -152,7 +157,7 @@ class bookTaxiActivity : AppCompatActivity() {
             val selectedDate = Calendar.getInstance()
             selectedDate.time = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(date)
 
-            val currentDate = Calendar.getInstance()
+            val currentDate = Calendar.getInstance().time
 
             if (selectedDate.before(currentDate)) {
                 // Show an error message if the selected date is before the current date
@@ -209,5 +214,34 @@ class bookTaxiActivity : AppCompatActivity() {
             // Invalid time format
             Toast.makeText(this, "Invalid time format. Please use HH:MM", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun showDatePicker() {
+        val currentDate = Calendar.getInstance()
+        val year = currentDate.get(Calendar.YEAR)
+        val month = currentDate.get(Calendar.MONTH)
+        val day = currentDate.get(Calendar.DAY_OF_MONTH)
+
+        val datePicker = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                // Check if the selected date is not before the current date
+                val selectedDate = Calendar.getInstance()
+                selectedDate.set(selectedYear, selectedMonth, selectedDay)
+                if (!selectedDate.before(currentDate)) {
+                    // Format the selected date and update the EditText
+                    val formattedDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(selectedDate.time)
+                    dateEDT.setText(formattedDate)
+                } else {
+                    // Show an error message or handle the invalid date
+                    Toast.makeText(this, "Please select a date on or after the current date", Toast.LENGTH_SHORT).show()
+                }
+            },
+            year,
+            month,
+            day
+        )
+
+        datePicker.show()
     }
 }
