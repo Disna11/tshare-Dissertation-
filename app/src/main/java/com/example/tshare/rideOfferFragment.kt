@@ -20,6 +20,7 @@ class rideOfferFragment : Fragment() {
     private lateinit var dbref: DatabaseReference
     private lateinit var carOffersRecyclerview: RecyclerView
     private lateinit var carOffersArraylist: ArrayList<recyclerOffers>
+    private var preferenceHelper: preferenceHelper? =null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -29,7 +30,7 @@ class rideOfferFragment : Fragment() {
         carOffersRecyclerview=view.findViewById(R.id.offers)
         carOffersRecyclerview.layoutManager= LinearLayoutManager(requireActivity())
         carOffersRecyclerview.setHasFixedSize(true)
-
+        preferenceHelper =  preferenceHelper(requireContext())
         carOffersArraylist= arrayListOf<recyclerOffers>()
         getOffers()
 
@@ -70,7 +71,7 @@ class rideOfferFragment : Fragment() {
                         }
                     }
 
-                    carOffersRecyclerview.adapter= homeFragmentCarAdapter(carOffersArraylist)
+                    carOffersRecyclerview.adapter= homeFragmentCarAdapter(carOffersArraylist,preferenceHelper!!)
                 }
             }
 

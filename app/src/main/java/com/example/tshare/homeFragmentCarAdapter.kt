@@ -8,10 +8,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
 
-class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) : RecyclerView.Adapter<homeFragmentCarAdapter.MyViewHolder>() {
+
+class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, private val preferenceHelper: preferenceHelper,) : RecyclerView.Adapter<homeFragmentCarAdapter.MyViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -48,6 +48,13 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) 
                 holder.itemView.context.startActivity(intent)
             }
         }
+
+        holder.vehicle_button?.setOnClickListener {
+            val vehicleId=currentitem.userId.toString()
+             preferenceHelper!!.saveString("vehicleOwnerId",vehicleId)// save the userId of the vehicle in preference helper
+            val intent = Intent(holder.itemView.context, showVehicleInfoActivity::class.java)
+            holder.itemView.context.startActivity(intent)
+        }
     }
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
@@ -58,6 +65,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>) 
         val  aTimezone: TextView = itemView.findViewById(R.id.reTimeZone)
         val  aPreference: TextView = itemView.findViewById(R.id.rePreference)
         val map_button: Button = itemView.findViewById(R.id.reRoute)
+        val vehicle_button: Button = itemView.findViewById(R.id.reVehicleDetailsButton)
 
 
     }

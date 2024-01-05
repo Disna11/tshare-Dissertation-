@@ -2,13 +2,21 @@ package com.example.tshare
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 class homeFragmentTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShare>) : RecyclerView.Adapter<homeFragmentTaxiShareAdapter.MyViewHolder>() {
 
@@ -49,6 +57,28 @@ class homeFragmentTaxiShareAdapter(private val offerList : ArrayList<recyclerTax
                 holder.itemView.context.startActivity(intent)
             }
         }
+        val id= currentitem.userId.toString()
+        if(!id.equals("")){
+            val profilePictureRef = FirebaseDatabase.getInstance().getReference("users/$id/profilePicture")
+            profilePictureRef.addValueEventListener(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val profilePictureUrl = dataSnapshot.value.toString()
+
+                    // Use Glide to load the image into the ImageView
+                    Glide.with(holder.itemView.context)
+                        .load(profilePictureUrl)
+//                    .placeholder(R.drawable.profile_photo) // Placeholder image
+//                    .error(R.drawable.default_profile_image)       // Error image if loading fails
+                        .into(holder.proPic)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {
+                    // Handle error
+                    Log.e("ProfileFragment", "Error loading profile picture", databaseError.toException())
+                }
+            })
+
+        }
 
 
     }
@@ -64,6 +94,7 @@ class homeFragmentTaxiShareAdapter(private val offerList : ArrayList<recyclerTax
         val  aTimezone: TextView = itemView.findViewById(R.id.taxiTimeZone)
         val  aPreference: TextView = itemView.findViewById(R.id.taxiPreference)
         val map_button: Button = itemView.findViewById(R.id.taxiRoute)
+        val proPic: ShapeableImageView= itemView.findViewById(R.id.propic)
 
     }
 }
