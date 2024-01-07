@@ -17,25 +17,28 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".showVehicleInfoActivity"
+            android:name=".activity.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".bookTaxiActivity"
+            android:name=".activity.showVehicleInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".bookCarActivity"
+            android:name=".activity.bookTaxiActivity"
             android:exported="false" />
         <activity
-            android:name=".homeActivity"
+            android:name=".activity.bookCarActivity"
             android:exported="false" />
         <activity
-            android:name=".signupActivity"
+            android:name=".activity.homeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.signupActivity"
             android:exported="true" />
         <activity
-            android:name=".loginActivity"
+            android:name=".activity.loginActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_container"
     android:background="#f5f5f5"
-    tools:context=".ProfileFragment">
+    tools:context=".fragment.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"

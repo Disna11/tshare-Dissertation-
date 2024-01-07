@@ -212,7 +212,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/reRoute"
+                android:id="@+id/reChat"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"

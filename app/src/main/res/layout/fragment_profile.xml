@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/fragment_container"
     android:background="#f5f5f5"
-    tools:context=".ProfileFragment">
+    tools:context=".fragment.ProfileFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -70,6 +70,20 @@
                     tools:layout_editor_absoluteY="221dp" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/close_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:clickable="true"
+                    android:contentDescription="TODO"
+                    android:focusable="true"
+                    android:src="@drawable/icon_close"
+                    app:backgroundTint="@color/white"
+                    app:layout_constraintBottom_toTopOf="@+id/profile_photo"
+                    app:layout_constraintTop_toTopOf="@+id/profile_photo"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="7dp" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/profile_edit_photo"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
@@ -86,16 +100,16 @@
                     android:id="@+id/profile_logout"
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    app:backgroundTint="@color/white"
                     android:clickable="true"
                     android:contentDescription="TODO"
                     android:focusable="true"
                     android:src="@drawable/logout"
+                    app:backgroundTint="@color/white"
                     app:layout_constraintBottom_toTopOf="@+id/profile_photo"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/profile_photo"
                     app:layout_constraintVertical_bias="0.0"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="-1dp" />
+                    tools:ignore="MissingConstraints" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
