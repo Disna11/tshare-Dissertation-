@@ -16,10 +16,9 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="65dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-
         android:background="@color/teal_700">
         <TextView
             android:layout_width="wrap_content"
@@ -28,17 +27,34 @@
             android:textStyle="bold"
             android:layout_marginStart="15dp"
             android:textSize="15sp"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="250dp">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:id="@+id/proPic"
-            android:layout_marginStart="250dp"
-            android:layout_marginEnd="10dp"
-            android:src="@mipmap/ic_launcher"
-            app:civ_border_color="@color/teal_700"
-            app:civ_border_width="1dp"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:id="@+id/proPic"
+                android:layout_marginEnd="10dp"
+                android:src="@mipmap/ic_launcher"
+                app:civ_border_color="@color/teal_700"
+                app:civ_border_width="1dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/profileName"
+                android:text="Disna"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

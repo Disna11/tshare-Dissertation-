@@ -7,4 +7,4 @@ data class chatUser(
     private var lastName: String? = null,
     private var address: String? = null,
     private var dob: String? = null,
-    private var phone: String? = null)
+    private var phone: String? = null )

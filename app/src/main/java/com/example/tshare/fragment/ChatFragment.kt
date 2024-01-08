@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -27,6 +29,7 @@ class ChatFragment : Fragment() {
     private lateinit var imgBackBtn: CircleImageView
     private lateinit var dbref: DatabaseReference
     private lateinit var userChatArraylist: ArrayList<chatUser>
+    private  var profileName: TextView?= null
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
@@ -37,6 +40,7 @@ class ChatFragment : Fragment() {
 
         userRecyclerView = view.findViewById(R.id.userRecyclerView)
         imgBackBtn = view.findViewById(R.id.proPic)
+        profileName=view.findViewById(R.id.profileName)
 
         userRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
         userRecyclerView.setHasFixedSize(true)
@@ -47,6 +51,7 @@ class ChatFragment : Fragment() {
 
         if (uid != null) {
             val profilePictureRef = FirebaseDatabase.getInstance().getReference("users/$uid/profilePicture")
+            val profileNameRef = FirebaseDatabase.getInstance().getReference("users/$uid/username")
 
             profilePictureRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -65,6 +70,19 @@ class ChatFragment : Fragment() {
                     // Handle error
                     Log.e("ProfileFragment", "Error loading profile picture", databaseError.toException())
                 }
+            })
+
+            profileNameRef.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    val proName= snapshot.value.toString()
+                    profileName?.setText(proName)
+
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    TODO("Not yet implemented")
+                }
+
             })
 
             getUsers()
