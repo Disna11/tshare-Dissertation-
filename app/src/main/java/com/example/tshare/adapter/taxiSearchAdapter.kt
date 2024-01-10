@@ -14,28 +14,28 @@ import com.bumptech.glide.Glide
 import com.example.tshare.R
 import com.example.tshare.activity.ChatActivity
 import com.example.tshare.activity.showVehicleInfoActivity
-import com.example.tshare.preferenceHelper
 import com.example.tshare.model.recyclerOffers
+import com.example.tshare.model.recyclerTaxiShare
+import com.example.tshare.preferenceHelper
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
+class taxiSearchAdapter(private val offerList : ArrayList<recyclerTaxiShare>, private val preferenceHelper: preferenceHelper): RecyclerView.Adapter<taxiSearchAdapter.MyViewHolder>() {
 
-class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, private val preferenceHelper: preferenceHelper) : RecyclerView.Adapter<homeFragmentCarAdapter.MyViewHolder>() {
-
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-       val itemView= LayoutInflater.from(parent.context).inflate(R.layout.offers_item,parent,false)
-        return MyViewHolder(itemView)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): taxiSearchAdapter.MyViewHolder {
+        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.taxi_item,parent,false)
+        return taxiSearchAdapter.MyViewHolder(itemView)
     }
 
     override fun getItemCount(): Int {
         return  offerList.size
     }
 
-    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: taxiSearchAdapter.MyViewHolder, position: Int) {
+
         val  currentitem= offerList[position]
 
         holder.aFrom.text = currentitem.from
@@ -44,7 +44,6 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
         holder.aTime.text = currentitem.time
         holder.aTimezone.text = currentitem.timeZone
         holder.aPreference.text = currentitem.preference
-
 
         holder.map_button?.setOnClickListener {
             val source = currentitem.from.toString()
@@ -60,14 +59,6 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
                 holder.itemView.context.startActivity(intent)
             }
         }
-
-        holder.vehicle_button?.setOnClickListener {
-            val vehicleId=currentitem.userId.toString()
-             preferenceHelper!!.saveString("vehicleOwnerId",vehicleId)// save the userId of the vehicle in preference helper
-            val intent = Intent(holder.itemView.context, showVehicleInfoActivity::class.java)
-            holder.itemView.context.startActivity(intent)
-        }
-
         holder.chat_button?.setOnClickListener {
             val userId = currentitem.userId.toString()
             val intent = Intent(holder.itemView.context, ChatActivity::class.java)
@@ -98,20 +89,21 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
 
         }
 
+
+
     }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
 
-        val  aFrom : TextView = itemView.findViewById(R.id.reFrom)
-        val  aTo : TextView = itemView.findViewById(R.id.reTo)
-        val  aDate : TextView = itemView.findViewById(R.id.reDate)
-        val  aTime : TextView = itemView.findViewById(R.id.reTime)
-        val  aTimezone: TextView = itemView.findViewById(R.id.reTimeZone)
-        val  aPreference: TextView = itemView.findViewById(R.id.rePreference)
-        val proPic: ShapeableImageView=itemView.findViewById(R.id.propic)
-        val map_button: Button = itemView.findViewById(R.id.reRoute)
-        val vehicle_button: Button = itemView.findViewById(R.id.reVehicleDetailsButton)
-        val chat_button: Button = itemView.findViewById(R.id.reChatButton)
-
+        val  aFrom : TextView = itemView.findViewById(R.id.taxiFrom)
+        val  aTo : TextView = itemView.findViewById(R.id.taxiTo)
+        val  aDate : TextView = itemView.findViewById(R.id.taxiDate)
+        val  aTime : TextView = itemView.findViewById(R.id.taxiTime)
+        val  aTimezone: TextView = itemView.findViewById(R.id.taxiTimeZone)
+        val  aPreference: TextView = itemView.findViewById(R.id.taxiPreference)
+        val map_button: Button = itemView.findViewById(R.id.taxiRoute)
+        val proPic: ShapeableImageView= itemView.findViewById(R.id.propic)
+        val chat_button: Button= itemView.findViewById(R.id.reChat)
 
     }
 }

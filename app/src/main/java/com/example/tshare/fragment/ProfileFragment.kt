@@ -113,12 +113,6 @@ class ProfileFragment : Fragment() {
             })
         }
 
-        val closeButton = view.findViewById<FloatingActionButton>(R.id.close_button)
-        closeButton?.setOnClickListener {
-            // Navigate back to the previous fragment
-            requireActivity().supportFragmentManager.popBackStack()
-        }
-//
 
         editPhotoButton?.setOnClickListener {
             val photoIntent = Intent(Intent.ACTION_PICK)

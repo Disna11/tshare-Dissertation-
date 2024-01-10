@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="textColour">#0892D0</color>
     <color name="hintColor">#A9A9A9</color>
+    <color name="brass">#E1C16E</color>
 </resources>
