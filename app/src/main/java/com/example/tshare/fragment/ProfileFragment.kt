@@ -42,6 +42,7 @@ class ProfileFragment : Fragment() {
     private  lateinit var  editprofiletxt: TextView
     private  lateinit var  updatePasswordtxt: TextView
     private  lateinit var  vehicleinfo: TextView
+    private  lateinit var  myHistory: TextView
     var preferenceHelper: preferenceHelper? =null
     var email:String?=null
     var currentuid:String?=null
@@ -68,6 +69,7 @@ class ProfileFragment : Fragment() {
         profileEmailTextView = view.findViewById(R.id.profile_email)
         editPhotoButton = view.findViewById(R.id.profile_edit_photo)
         logoutButton = view.findViewById(R.id.profile_logout)
+        myHistory = view.findViewById(R.id.history)
         preferenceHelper = preferenceHelper(requireContext())
         editprofiletxt=view.findViewById(R.id.editprofile)
         updatePasswordtxt=view.findViewById(R.id.resetPassword)
@@ -150,6 +152,15 @@ class ProfileFragment : Fragment() {
             val myIntent = Intent(requireActivity(), loginActivity::class.java)
             startActivity(myIntent)
             requireActivity().finish()
+
+        }
+
+        myHistory?.setOnClickListener {
+            val myHistory= historyFragment()
+            val transaction=requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.fragment_container,myHistory)
+            transaction.addToBackStack(null)
+            transaction.commit()
 
         }
 

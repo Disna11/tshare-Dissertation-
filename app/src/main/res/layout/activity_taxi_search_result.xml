@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".activity.taxiSearchResultActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="There is nothing to show"
+        android:textStyle="bold"
+        android:textColor="@color/hintColor"
+        android:textSize="18sp"
+        tools:ignore="MissingConstraints" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
