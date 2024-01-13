@@ -29,6 +29,7 @@ class historyRideOfferFragment : Fragment() {
     private lateinit var dbref: DatabaseReference
     private lateinit var carOffersRecyclerview: RecyclerView
     private lateinit var carOffersArraylist: ArrayList<recyclerOffers>
+    private lateinit var itemIds: ArrayList<String>
     private var preferenceHelper: preferenceHelper? =null
     private lateinit var auth: FirebaseAuth
 
@@ -48,6 +49,7 @@ class historyRideOfferFragment : Fragment() {
         auth= Firebase.auth
         preferenceHelper =  preferenceHelper(requireContext())
         carOffersArraylist= arrayListOf<recyclerOffers>()
+        itemIds= arrayListOf()
         getOffers()
 
         return view
@@ -72,10 +74,11 @@ class historyRideOfferFragment : Fragment() {
 
                         if (uid== cuid) {
                             carOffersArraylist.add(offers!!)
+                            itemIds.add(userSnapshot.key ?: "")
                         }
                     }
 
-                    carOffersRecyclerview.adapter= historyCarAdapter(carOffersArraylist,preferenceHelper!!)
+                    carOffersRecyclerview.adapter= historyCarAdapter(carOffersArraylist,preferenceHelper!!,itemIds)
                 }
             }
 

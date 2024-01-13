@@ -9,21 +9,29 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tshare.R
 import com.example.tshare.activity.ChatActivity
 import com.example.tshare.activity.showVehicleInfoActivity
+import com.example.tshare.activity.updateRideActivity
+import com.example.tshare.activity.updateTaxiActivity
 import com.example.tshare.preferenceHelper
 import com.example.tshare.model.recyclerOffers
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
-class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>, private val preferenceHelper: preferenceHelper) : RecyclerView.Adapter<historyCarAdapter.MyViewHolder>() {
+class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
+                        private val preferenceHelper: preferenceHelper,
+                        private val itemIds: ArrayList<String>
+) : RecyclerView.Adapter<historyCarAdapter.MyViewHolder>() {
+
+    private lateinit var dbref: DatabaseReference
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -36,66 +44,156 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>, priva
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val  currentitem= offerList[position]
+        if (position <offerList.size && position < itemIds.size) {
+            val currentitem = offerList[position]
+            val itemId = itemIds[position]
+            val date = currentitem.date
 
-        holder.aFrom.text = currentitem.from
-        holder.aTo.text = currentitem.to
-        holder.aDate.text = currentitem.date
-        holder.aTime.text = currentitem.time
-        holder.aTimezone.text = currentitem.timeZone
-        holder.aPreference.text = currentitem.preference
+            holder.aFrom.text = currentitem.from
+            holder.aTo.text = currentitem.to
+            holder.aDate.text = currentitem.date
+            holder.aTime.text = currentitem.time
+            holder.aTimezone.text = currentitem.timeZone
+            holder.aPreference.text = currentitem.preference
 
 
-        holder.map_button?.setOnClickListener {
-            val source = currentitem.from.toString()
-            val destination = currentitem.to.toString()
+            holder.map_button?.setOnClickListener {
+                val source = currentitem.from.toString()
+                val destination = currentitem.to.toString()
 
-            if (source.isEmpty() || destination.isEmpty()) {
-                Toast.makeText(holder.itemView.context, "Source and destination are empty", Toast.LENGTH_LONG).show()
-            } else {
-                val uri = Uri.parse("http://www.google.com/maps/dir/$source/$destination")
-                val intent = Intent(Intent.ACTION_VIEW, uri)
-                intent.setPackage("com.google.android.apps.maps")
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                holder.itemView.context.startActivity(intent)
+                if (source.isEmpty() || destination.isEmpty()) {
+                    Toast.makeText(
+                        holder.itemView.context,
+                        "Source and destination are empty",
+                        Toast.LENGTH_LONG
+                    ).show()
+                } else {
+                    val uri = Uri.parse("http://www.google.com/maps/dir/$source/$destination")
+                    val intent = Intent(Intent.ACTION_VIEW, uri)
+                    intent.setPackage("com.google.android.apps.maps")
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    holder.itemView.context.startActivity(intent)
+                }
             }
-        }
 
-        holder.deleteBtn?.setOnClickListener {
-            val vehicleId=currentitem.userId.toString()
-             preferenceHelper!!.saveString("vehicleOwnerId",vehicleId)// save the userId of the vehicle in preference helper
-            val intent = Intent(holder.itemView.context, showVehicleInfoActivity::class.java)
-            holder.itemView.context.startActivity(intent)
-        }
+            holder.deleteBtn?.setOnClickListener {
 
-        holder.updateBtn?.setOnClickListener {
-            val userId = currentitem.userId.toString()
-            val intent = Intent(holder.itemView.context, ChatActivity::class.java)
-            intent.putExtra("UserId", userId)
-            holder.itemView.context.startActivity(intent)
-        }
+                dbref = FirebaseDatabase.getInstance().getReference("seatAvailability")
 
-        val id= currentitem.userId.toString()
-        if(!id.equals("")){
-            val profilePictureRef = FirebaseDatabase.getInstance().getReference("users/$id/profilePicture")
-            profilePictureRef.addValueEventListener(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    val profilePictureUrl = dataSnapshot.value.toString()
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val firebaseDate = dateFormat.parse(date)
+                val calendar = Calendar.getInstance()
+                calendar.time = firebaseDate
+                calendar.set(Calendar.HOUR_OF_DAY, 0)
+                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.SECOND, 0)
+                calendar.set(Calendar.MILLISECOND, 0)
+                val midnightFirebaseDate = calendar.time
+                val currentDate = Calendar.getInstance().time
+                val midnightCurrentDate = Calendar.getInstance().apply {
+                    time = currentDate
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
+                Log.d(
+                    "AdapterDebug",
+                    "Before Deletion - offerList size: ${offerList.size}, itemIds size: ${itemIds.size}"
+                )
+// Deletion logic
+                Log.d(
+                    "AdapterDebug",
+                    "After Deletion - offerList size: ${offerList.size}, itemIds size: ${itemIds.size}"
+                )
 
-                    // Use Glide to load the image into the ImageView
-                    Glide.with(holder.itemView.context)
-                        .load(profilePictureUrl)
+                if (midnightFirebaseDate < midnightCurrentDate) {
+
+                    Toast.makeText(holder.itemView.context, "Could not delete", Toast.LENGTH_LONG)
+                        .show()
+
+                } else {
+                    dbref.child(itemId).removeValue().addOnSuccessListener {
+                        Toast.makeText(
+                            holder.itemView.context,
+                            "successfully deleted",
+                            Toast.LENGTH_LONG
+                        ).show()
+                        offerList.remove(currentitem)
+                        notifyItemRemoved(position)
+
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            holder.itemView.context,
+                            "failed to delete",
+                            Toast.LENGTH_LONG
+                        ).show()
+
+                    }
+                }
+
+            }
+
+            holder.updateBtn?.setOnClickListener {
+                val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val firebaseDate = dateFormat.parse(date)
+                val calendar = Calendar.getInstance()
+                calendar.time = firebaseDate
+                calendar.set(Calendar.HOUR_OF_DAY, 0)
+                calendar.set(Calendar.MINUTE, 0)
+                calendar.set(Calendar.SECOND, 0)
+                calendar.set(Calendar.MILLISECOND, 0)
+                val midnightFirebaseDate = calendar.time
+                val currentDate = Calendar.getInstance().time
+                val midnightCurrentDate = Calendar.getInstance().apply {
+                    time = currentDate
+                    set(Calendar.HOUR_OF_DAY, 0)
+                    set(Calendar.MINUTE, 0)
+                    set(Calendar.SECOND, 0)
+                    set(Calendar.MILLISECOND, 0)
+                }.time
+                if(midnightFirebaseDate < midnightCurrentDate){
+
+                    Toast.makeText(holder.itemView.context,"Could not update",Toast.LENGTH_LONG).show()
+
+                }else{
+                    val myIntent = Intent(holder.itemView.context, updateRideActivity::class.java)
+                    myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    val userId=currentitem.userId
+                    myIntent.putExtra("itemId", itemId)
+                    myIntent.putExtra("userId",userId)
+                    holder.itemView.context.startActivity(myIntent)
+                }
+
+            }
+
+            val id = currentitem.userId.toString()
+            if (!id.equals("")) {
+                val profilePictureRef =
+                    FirebaseDatabase.getInstance().getReference("users/$id/profilePicture")
+                profilePictureRef.addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(dataSnapshot: DataSnapshot) {
+                        val profilePictureUrl = dataSnapshot.value.toString()
+
+                        // Use Glide to load the image into the ImageView
+                        Glide.with(holder.itemView.context)
+                            .load(profilePictureUrl)
 //                    .placeholder(R.drawable.profile_photo) // Placeholder image
 //                    .error(R.drawable.default_profile_image)       // Error image if loading fails
-                        .into(holder.proPic)
-                }
+                            .into(holder.proPic)
+                    }
 
-                override fun onCancelled(databaseError: DatabaseError) {
-                    // Handle error
-                    Log.e("ProfileFragment", "Error loading profile picture", databaseError.toException())
-                }
-            })
+                    override fun onCancelled(databaseError: DatabaseError) {
+                        // Handle error
+                        Log.e(
+                            "ProfileFragment",
+                            "Error loading profile picture",
+                            databaseError.toException()
+                        )
+                    }
+                })
 
+            }
         }
 
     }

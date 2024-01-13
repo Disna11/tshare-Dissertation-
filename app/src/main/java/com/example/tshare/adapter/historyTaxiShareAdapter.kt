@@ -13,14 +13,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tshare.R
 import com.example.tshare.activity.ChatActivity
+import com.example.tshare.activity.updateTaxiActivity
 import com.example.tshare.model.recyclerTaxiShare
 import com.google.android.material.imageview.ShapeableImageView
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class historyTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShare>) : RecyclerView.Adapter<historyTaxiShareAdapter.MyViewHolder>() {
+
+class historyTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShare>,
+                              private val itemIds: ArrayList<String>)
+                                : RecyclerView.Adapter<historyTaxiShareAdapter.MyViewHolder>() {
+
+    private lateinit var dbref: DatabaseReference
 
 
 
@@ -37,6 +43,8 @@ class historyTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShar
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentitem = offerList[position]
+        val itemId=itemIds[position]
+        val date=currentitem.date
 
         holder.aFrom.text = currentitem.from
         holder.aTo.text = currentitem.to
@@ -60,11 +68,81 @@ class historyTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShar
             }
         }
         holder.delete?.setOnClickListener {
-            val userId = currentitem.userId.toString()
-            val intent = Intent(holder.itemView.context, ChatActivity::class.java)
-            intent.putExtra("UserId", userId)
-            holder.itemView.context.startActivity(intent)
+            dbref= FirebaseDatabase.getInstance().getReference("taxiRequests")
+
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val firebaseDate = dateFormat.parse(date)
+            val calendar = Calendar.getInstance()
+            calendar.time = firebaseDate
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            val midnightFirebaseDate = calendar.time
+            val currentDate = Calendar.getInstance().time
+            val midnightCurrentDate = Calendar.getInstance().apply {
+                time = currentDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+            if(midnightFirebaseDate < midnightCurrentDate){
+
+                Toast.makeText(holder.itemView.context,"Could not delete",Toast.LENGTH_LONG).show()
+
+            }else{
+
+                dbref.child(itemId).removeValue().addOnSuccessListener {
+                    Toast.makeText(holder.itemView.context,"successfully deleted",Toast.LENGTH_LONG).show()
+
+//                    val deletedPosition = position
+//                    offerList.removeAt(deletedPosition)
+//                    itemIds.removeAt(deletedPosition)
+//
+//                    // Notify the adapter about the removal
+//                    notifyItemRemoved(deletedPosition)
+                }.addOnFailureListener {
+                    Toast.makeText(holder.itemView.context,"failed to delete",Toast.LENGTH_LONG).show()
+
+                }
+            }
         }
+        holder.update?.setOnClickListener {
+            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            val firebaseDate = dateFormat.parse(date)
+            val calendar = Calendar.getInstance()
+            calendar.time = firebaseDate
+            calendar.set(Calendar.HOUR_OF_DAY, 0)
+            calendar.set(Calendar.MINUTE, 0)
+            calendar.set(Calendar.SECOND, 0)
+            calendar.set(Calendar.MILLISECOND, 0)
+            val midnightFirebaseDate = calendar.time
+            val currentDate = Calendar.getInstance().time
+            val midnightCurrentDate = Calendar.getInstance().apply {
+                time = currentDate
+                set(Calendar.HOUR_OF_DAY, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
+            if(midnightFirebaseDate < midnightCurrentDate){
+
+                Toast.makeText(holder.itemView.context,"Could not update",Toast.LENGTH_LONG).show()
+
+            }else{
+                val myIntent = Intent(holder.itemView.context, updateTaxiActivity::class.java)
+                myIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+                val userId=currentitem.userId
+                myIntent.putExtra("itemId", itemId)
+                myIntent.putExtra("userId",userId)
+                holder.itemView.context.startActivity(myIntent)
+            }
+
+
+
+        }
+
         val id= currentitem.userId.toString()
         if(!id.equals("")){
             val profilePictureRef = FirebaseDatabase.getInstance().getReference("users/$id/profilePicture")

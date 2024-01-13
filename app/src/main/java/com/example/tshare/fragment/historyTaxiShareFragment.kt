@@ -27,6 +27,7 @@ class historyTaxiShareFragment : Fragment() {
     private lateinit var dbref: DatabaseReference
     private lateinit var taxiShareRecyclerview: RecyclerView
     private lateinit var taxiShareArraylist: ArrayList<recyclerTaxiShare>
+    private lateinit var itemIds: ArrayList<String>
     private lateinit var auth: FirebaseAuth
 
     @SuppressLint("MissingInflatedId")
@@ -41,6 +42,7 @@ class historyTaxiShareFragment : Fragment() {
         taxiShareRecyclerview.setHasFixedSize(true)
 
         taxiShareArraylist= arrayListOf<recyclerTaxiShare>()
+        itemIds = arrayListOf()
         auth= Firebase.auth
         getOffers()
         return view
@@ -59,10 +61,11 @@ class historyTaxiShareFragment : Fragment() {
                         val cuid = currentUser?.uid?.toString() ?: ""
                         if (uid== cuid) {
                             taxiShareArraylist.add(taxiRequests!!)
+                            itemIds.add(userSnapshot.key ?: "")
                         }
                     }
 
-                    taxiShareRecyclerview.adapter= historyTaxiShareAdapter(taxiShareArraylist)
+                    taxiShareRecyclerview.adapter= historyTaxiShareAdapter(taxiShareArraylist,itemIds)
                 }
             }
 
