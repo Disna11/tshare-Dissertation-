@@ -96,12 +96,8 @@ class historyTaxiShareAdapter(private val offerList : ArrayList<recyclerTaxiShar
                 dbref.child(itemId).removeValue().addOnSuccessListener {
                     Toast.makeText(holder.itemView.context,"successfully deleted",Toast.LENGTH_LONG).show()
 
-//                    val deletedPosition = position
-//                    offerList.removeAt(deletedPosition)
-//                    itemIds.removeAt(deletedPosition)
-//
-//                    // Notify the adapter about the removal
-//                    notifyItemRemoved(deletedPosition)
+                   offerList.remove(currentitem)
+                        notifyDataSetChanged()
                 }.addOnFailureListener {
                     Toast.makeText(holder.itemView.context,"failed to delete",Toast.LENGTH_LONG).show()
 

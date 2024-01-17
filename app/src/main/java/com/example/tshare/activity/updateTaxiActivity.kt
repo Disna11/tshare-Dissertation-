@@ -226,7 +226,8 @@ class updateTaxiActivity : AppCompatActivity() {
                 databaseReference.setValue(updatedData)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Update successful", Toast.LENGTH_SHORT).show()
-
+                        setResult(RESULT_OK)
+                        finish()
                     }
                     .addOnFailureListener {
                         Toast.makeText(this, "Failed to update data", Toast.LENGTH_SHORT).show()

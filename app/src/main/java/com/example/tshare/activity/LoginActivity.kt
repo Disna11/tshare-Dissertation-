@@ -92,30 +92,28 @@ class loginActivity : AppCompatActivity() {
                         prog?.visibility = View.GONE
                         if (task.isSuccessful) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(
-                                this,
-                                "Login Successful",
-                                Toast.LENGTH_SHORT,
-                            ).show()
-                            // Get the current user
-                            val currentUser = auth.currentUser
-
-                            // Check if the user is not null
-                            if (currentUser != null) {
-                                // Access user information
-                                val uid = currentUser.uid?.toString() ?: ""
-                                val email = currentUser.email?.toString() ?:""
+                           val verified= auth.currentUser?.isEmailVerified
+                            if(verified == true){
+                                Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT,).show()
+                                val currentUser = auth.currentUser
+                                if (currentUser != null) {
+                                    // Access user information
+                                    val uid = currentUser.uid?.toString() ?: ""
+                                    val email = currentUser.email?.toString() ?:""
 
 
-                                preferenceHelper?.saveString("logedin_email", email)
-                                preferenceHelper?.saveString("userid", uid)
-                                preferenceHelper?.saveString("userpassword", password)
-                                var ppp=preferenceHelper?.getString("userpassword","")
+                                    preferenceHelper?.saveString("logedin_email", email)
+                                    preferenceHelper?.saveString("userid", uid)
+                                    preferenceHelper?.saveString("userpassword", password)
+                                    var ppp=preferenceHelper?.getString("userpassword","")
 
+                                }
+                                val myIntent = Intent(applicationContext, homeActivity::class.java)
+                                startActivity(myIntent)
+                                finish()
+                            }else{
+                                Toast.makeText(this,"Please verify your email",Toast.LENGTH_SHORT).show()
                             }
-                            val myIntent = Intent(applicationContext, homeActivity::class.java)
-                            startActivity(myIntent)
-                            finish()
 
                         } else {
                             // If sign in fails, display a message to the user.

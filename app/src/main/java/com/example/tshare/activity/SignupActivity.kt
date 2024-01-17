@@ -124,6 +124,14 @@ class signupActivity : AppCompatActivity() {
 
                                     .addOnCompleteListener { databaseTask ->
                                         if (databaseTask.isSuccessful) {
+
+                                            auth.currentUser?.sendEmailVerification()?.addOnSuccessListener {
+                                                Toast.makeText(this, "please verify your email", Toast.LENGTH_SHORT,).show()
+
+                                            }?.addOnFailureListener {
+                                                Toast.makeText(this, "Failed to send verification code", Toast.LENGTH_SHORT).show()
+
+                                            }
                                             // Sign in success, update UI with the signed-in user's information
                                             Toast.makeText(this, "Account successfully created", Toast.LENGTH_SHORT,).show()
                                             val myIntent = Intent(applicationContext, loginActivity::class.java)

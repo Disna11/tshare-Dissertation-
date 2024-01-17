@@ -61,6 +61,8 @@ class historyRideOfferFragment : Fragment() {
         dbref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                carOffersArraylist.clear()
+                itemIds.clear()
                 if(snapshot.exists()){
                     for (userSnapshot in snapshot.children){
                         val offers= userSnapshot.getValue(recyclerOffers::class.java)

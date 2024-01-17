@@ -9,21 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.tshare.R
-import com.example.tshare.activity.ChatActivity
-import com.example.tshare.activity.showVehicleInfoActivity
 import com.example.tshare.activity.updateRideActivity
-import com.example.tshare.activity.updateTaxiActivity
-import com.example.tshare.preferenceHelper
 import com.example.tshare.model.recyclerOffers
+import com.example.tshare.preferenceHelper
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.firebase.database.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
@@ -32,7 +27,10 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
 ) : RecyclerView.Adapter<historyCarAdapter.MyViewHolder>() {
 
     private lateinit var dbref: DatabaseReference
+    private var instance: historyCarAdapter? = null
 
+
+    // Method to get the singleton instance
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
        val itemView= LayoutInflater.from(parent.context).inflate(R.layout.history_offers_item,parent,false)
@@ -41,6 +39,11 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
 
     override fun getItemCount(): Int {
         return  offerList.size
+    }
+
+    fun  updateList()
+    {
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
@@ -120,7 +123,8 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
                             Toast.LENGTH_LONG
                         ).show()
                         offerList.remove(currentitem)
-                        notifyItemRemoved(position)
+                        notifyDataSetChanged()
+
 
                     }.addOnFailureListener {
                         Toast.makeText(
@@ -186,8 +190,8 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
                     override fun onCancelled(databaseError: DatabaseError) {
                         // Handle error
                         Log.e(
-                            "ProfileFragment",
-                            "Error loading profile picture",
+                            "historyCarAdapter",
+                            "Error loading database",
                             databaseError.toException()
                         )
                     }
@@ -212,4 +216,6 @@ class historyCarAdapter(private val offerList : ArrayList<recyclerOffers>,
 
 
     }
+
+
 }

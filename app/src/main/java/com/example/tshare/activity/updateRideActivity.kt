@@ -8,6 +8,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import com.example.tshare.R
+import com.example.tshare.adapter.historyCarAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.database.FirebaseDatabase
 import java.text.ParseException
@@ -231,6 +232,9 @@ class updateRideActivity : AppCompatActivity() {
                 databaseReference.setValue(updatedData)
                     .addOnSuccessListener {
                         Toast.makeText(this, "Update successful", Toast.LENGTH_SHORT).show()
+                        setResult(RESULT_OK)
+                        finish()
+
 
                     }
                     .addOnFailureListener {

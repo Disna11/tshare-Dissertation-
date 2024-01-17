@@ -53,6 +53,8 @@ class historyTaxiShareFragment : Fragment() {
         dbref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) {
+                taxiShareArraylist.clear()
+                itemIds.clear()
                 if(snapshot.exists()){
                     for (userSnapshot in snapshot.children){
                         val taxiRequests= userSnapshot.getValue(recyclerTaxiShare::class.java)
