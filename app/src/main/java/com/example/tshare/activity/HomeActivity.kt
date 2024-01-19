@@ -16,8 +16,7 @@ class homeActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var BottomNavigationView: BottomNavigationView
-//    var txt: TextView?=null
-//    var btn: Button?=null
+
     var user: FirebaseUser?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,8 +26,7 @@ class homeActivity : AppCompatActivity() {
         auth = Firebase.auth
 
         BottomNavigationView=findViewById(R.id.btnav)
-//        txt=findViewById(R.id.txt)
-//        btn=findViewById(R.id.logout)
+
         user=auth.currentUser
         if(user==null){
             val myIntent = Intent(applicationContext, MainActivity::class.java)
@@ -64,12 +62,7 @@ class homeActivity : AppCompatActivity() {
             }
 
         }
-//        btn?.setOnClickListener {
-//            Firebase.auth.signOut()
-//            val myIntent = Intent(applicationContext, loginActivity::class.java)
-//            startActivity(myIntent)
-//            finish()
-//        }
+
         replaceFragment(HomeFragment())
     }
 

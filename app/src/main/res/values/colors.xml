@@ -7,6 +7,7 @@
     <color name="teal_700"> #009193</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="lightcyan">#E0FFFF</color>
     <color name="textColour">#0892D0</color>
     <color name="hintColor">#A9A9A9</color>
     <color name="brass">#E1C16E</color>

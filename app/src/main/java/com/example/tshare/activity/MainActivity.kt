@@ -21,10 +21,12 @@ class MainActivity : AppCompatActivity() {
         btnlogin.setOnClickListener {
             var intent = Intent(this, loginActivity::class.java)
             startActivity(intent);
+            finish()
         }
         btnreg.setOnClickListener {
             var intent = Intent(this, signupActivity::class.java)
             startActivity(intent);
+            finish()
         }
     }
 }

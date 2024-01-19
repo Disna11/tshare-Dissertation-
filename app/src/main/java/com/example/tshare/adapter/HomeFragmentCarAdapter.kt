@@ -1,5 +1,6 @@
 package com.example.tshare.adapter
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
 import android.util.Log
@@ -58,6 +59,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
                 intent.setPackage("com.google.android.apps.maps")
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 holder.itemView.context.startActivity(intent)
+
             }
         }
 
@@ -66,6 +68,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
              preferenceHelper!!.saveString("vehicleOwnerId",vehicleId)// save the userId of the vehicle in preference helper
             val intent = Intent(holder.itemView.context, showVehicleInfoActivity::class.java)
             holder.itemView.context.startActivity(intent)
+
         }
 
         holder.chat_button?.setOnClickListener {
@@ -73,6 +76,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
             val intent = Intent(holder.itemView.context, ChatActivity::class.java)
             intent.putExtra("UserId", userId)
             holder.itemView.context.startActivity(intent)
+
         }
 
         val id= currentitem.userId.toString()
@@ -85,7 +89,7 @@ class homeFragmentCarAdapter(private val offerList : ArrayList<recyclerOffers>, 
                     // Use Glide to load the image into the ImageView
                     Glide.with(holder.itemView.context)
                         .load(profilePictureUrl)
-//                    .placeholder(R.drawable.profile_photo) // Placeholder image
+//                   .placeholder(R.drawable.profile_photo) // Placeholder image
 //                    .error(R.drawable.default_profile_image)       // Error image if loading fails
                         .into(holder.proPic)
                 }

@@ -115,7 +115,7 @@ class signupActivity : AppCompatActivity() {
                                 val userReference = database.getReference("users/$uid")
                                 val userReferenceVehicle = database.getReference("vehicle/$uid")
 
-                                // Create a User object with the provided information
+                                // Create a User and vehicle object with the provided information
                                 val newUser = User(name, email, "","","","","")
                                 val newVehicle= VehicleAndDriver("","","","","","","")
 

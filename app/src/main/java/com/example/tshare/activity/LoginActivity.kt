@@ -29,16 +29,17 @@ class loginActivity : AppCompatActivity() {
     var lpassword: EditText?=null
     var logbutton:Button?=null
     var tosignup: TextView?=null
+    var forgotPassword: TextView?=null
     var preferenceHelper: preferenceHelper? =null
     public override fun onStart() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            val myIntent = Intent(applicationContext, homeActivity::class.java)
-            startActivity(myIntent)
-            finish()
-        }
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            val myIntent = Intent(applicationContext, homeActivity::class.java)
+//            startActivity(myIntent)
+//            finish()
+//        }
     }
 
 
@@ -62,6 +63,7 @@ class loginActivity : AppCompatActivity() {
         lpassword=findViewById(R.id.loginPassword)
         logbutton=findViewById(R.id.log_button)
         tosignup=findViewById(R.id.signup_text)
+        forgotPassword=findViewById(R.id.forgot_password)
         preferenceHelper = preferenceHelper(applicationContext)
 
 
@@ -69,6 +71,12 @@ class loginActivity : AppCompatActivity() {
 
         tosignup?.setOnClickListener {
             val myIntent = Intent(applicationContext, signupActivity::class.java)
+            startActivity(myIntent)
+            finish()
+
+        }
+        forgotPassword?.setOnClickListener {
+            val myIntent = Intent(applicationContext, forgotPasswordActivity::class.java)
             startActivity(myIntent)
             finish()
 
@@ -91,7 +99,7 @@ class loginActivity : AppCompatActivity() {
                     .addOnCompleteListener(this) { task ->
                         prog?.visibility = View.GONE
                         if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
+
                            val verified= auth.currentUser?.isEmailVerified
                             if(verified == true){
                                 Toast.makeText(this, "Login Successful", Toast.LENGTH_SHORT,).show()
@@ -101,11 +109,9 @@ class loginActivity : AppCompatActivity() {
                                     val uid = currentUser.uid?.toString() ?: ""
                                     val email = currentUser.email?.toString() ?:""
 
-
                                     preferenceHelper?.saveString("logedin_email", email)
                                     preferenceHelper?.saveString("userid", uid)
                                     preferenceHelper?.saveString("userpassword", password)
-                                    var ppp=preferenceHelper?.getString("userpassword","")
 
                                 }
                                 val myIntent = Intent(applicationContext, homeActivity::class.java)
@@ -114,16 +120,10 @@ class loginActivity : AppCompatActivity() {
                             }else{
                                 Toast.makeText(this,"Please verify your email",Toast.LENGTH_SHORT).show()
                             }
-
                         } else {
                             // If sign in fails, display a message to the user.
                             val errorMessage = task.exception?.message
-                            Toast.makeText(
-                                this,
-                                errorMessage,
-                                Toast.LENGTH_SHORT,
-                            ).show()
-
+                            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT,).show()
                         }
                     }
             }

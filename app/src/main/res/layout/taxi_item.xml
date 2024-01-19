@@ -56,7 +56,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Northampton"
+                        android:text=""
                         android:textColor="#000000"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -84,7 +84,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Manchester"
+                        android:text=""
                         android:textColor="#000000"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -111,7 +111,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="12/10/2024"
+                        android:text=""
                         android:textColor="#000000"
                         android:textSize="17sp"
                         android:textStyle="bold" />
@@ -143,7 +143,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
-                            android:text="09:10"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="17sp"
                             android:textStyle="bold" />
@@ -183,7 +183,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="Females"
+                        android:text=""
                         android:textColor="#000000"
                         android:textSize="17sp"
                         android:textStyle="bold" />
